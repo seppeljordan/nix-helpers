@@ -6,7 +6,7 @@ def prefetch_git(url, revision=None):
     cmd = [
         'nix-prefetch-git',
         url
-    ] + ['--rev', revision] if revision else []
+    ] + (['--rev', revision] if revision else [])
 
     process_return = subprocess.run(
         cmd,
