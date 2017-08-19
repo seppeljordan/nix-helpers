@@ -11,7 +11,18 @@ def this_repo():
 
 
 def in_nix_builder():
-    return os.environ.get('NIX_BUILD_TOP')
+    env = os.environ
+    print(env['HOME'])
+    return all([
+        env.get('PWD','').startswith('/tmp/nix-build'),
+        env.get('HOME','').startswith('/homeless-shelter'),
+    ])
+
+
+skip_in_nix_builder = pytest.mark.skipif(
+    in_nix_builder(),
+    reason="cannot fetch stuff inside nix builder"
+)
 
 
 def test_prefetch_git_from_non_url_throws():
@@ -19,9 +30,15 @@ def test_prefetch_git_from_non_url_throws():
         svm.nix.prefetch_git('')
 
 
+@skip_in_nix_builder
 def test_prefetch_git_this_repository_works_does_not_throw():
-    if in_nix_builder():
-        pytest.skip("inside of nix builder")
-    else:
-        prefetch_results = svm.nix.prefetch_git(this_repo())
-        assert 'url' in prefetch_results.keys()
+    prefetch_results = svm.nix.prefetch_git(this_repo())
+    assert 'url' in prefetch_results.keys()
+
+
+@skip_in_nix_builder
+def test_prefetch_git_branch_returns_the_same_as_prefetch_git():
+    assert (
+        svm.nix.prefetch_git(this_repo())['sha256'] ==
+        svm.nix.prefetch_git_branch(this_repo(), 'master')['sha256']
+    )

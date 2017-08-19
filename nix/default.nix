@@ -4,6 +4,7 @@ buildPythonPackage {
   src = ../.;
   buildInputs = [ pytest mypy flake8 nix-prefetch-scripts ];
   checkPhase = ''
+    echo $HOME
     make check
   '';
 }

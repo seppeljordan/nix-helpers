@@ -1,5 +1,7 @@
-import subprocess
 import json
+import os
+import subprocess
+import tempfile
 
 
 def prefetch_git(url, revision=None):
@@ -35,3 +37,31 @@ def prefetch_git(url, revision=None):
                 stderr=process_return.stderr,
             )
         )
+
+
+def checkout_repo(url, working_directory):
+    cmd = [
+        'git',
+        'clone',
+        url,
+        working_directory
+    ]
+    subprocess.run(cmd)
+
+
+def checkout_branch(branch_name, workdir):
+    cmd = [
+        'git',
+        'checkout',
+        branch_name
+    ]
+    subprocess.run(cmd, cwd=workdir)
+
+
+def prefetch_git_branch(url, branch):
+    with tempfile.TemporaryDirectory() as tempdir:
+        checkout_repo(url, tempdir)
+        checkout_branch(branch, tempdir)
+        prefetch_data = prefetch_git(os.path.abspath(tempdir))
+        prefetch_data['url'] = url
+        return prefetch_data

@@ -5,5 +5,5 @@ in
   with nixpkgs;
   stdenv.mkDerivation {
     name = "development-env";
-    buildInputs = [ python.interpreter ];
+    buildInputs = [ python.interpreter nix-prefetch-scripts git ];
   }
