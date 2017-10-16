@@ -110,8 +110,8 @@ let
 
 
     "mypy" = python.mkDerivation {
-      name = "mypy-0.521";
-      src = pkgs.fetchurl { url = "https://pypi.python.org/packages/18/11/733e33decfdbd76cce7158c92618b9317d4132b41affd04db00216d17f76/mypy-0.521.tar.gz"; sha256 = "9d30df20cd937b80cfc6007d75426f27a232789cfa288c63bf9370f2542c9658"; };
+      name = "mypy-0.530";
+      src = pkgs.fetchurl { url = "https://pypi.python.org/packages/5a/ff/a5efedf50f5d70eff399c306e5e0d3daf2dc1512ae99e3f9e4db46ddf2ff/mypy-0.530.tar.gz"; sha256 = "f94b4600b3ed3daa8da17648f08d29d6336b9da0bb1709d260bb4d14f20a9343"; };
       doCheck = commonDoCheck;
       buildInputs = commonBuildInputs;
       propagatedBuildInputs = [
@@ -172,8 +172,8 @@ let
 
 
     "pytest" = python.mkDerivation {
-      name = "pytest-3.2.1";
-      src = pkgs.fetchurl { url = "https://pypi.python.org/packages/6d/9f/1fbd50be4deaa4007ef4ed8f84f888c6613c629e1f46e979ffb9d82a7324/pytest-3.2.1.tar.gz"; sha256 = "4c2159d2be2b4e13fa293e7a72bdf2f06848a017150d5c6d35112ce51cfd74ce"; };
+      name = "pytest-3.2.3";
+      src = pkgs.fetchurl { url = "https://pypi.python.org/packages/53/d0/208853c09be8377e6d4de7c0df875ef7ef37189373d76a74b65b44e50528/pytest-3.2.3.tar.gz"; sha256 = "27fa6617efc2869d3e969a3e75ec060375bfb28831ade8b5cdd68da3a741dc3c"; };
       doCheck = commonDoCheck;
       buildInputs = commonBuildInputs;
       propagatedBuildInputs = [
@@ -189,8 +189,8 @@ let
 
 
     "typed-ast" = python.mkDerivation {
-      name = "typed-ast-1.0.4";
-      src = pkgs.fetchurl { url = "https://pypi.python.org/packages/6c/8c/308968906916c5523c3a0e5ecb8ba8d79b8baf67f05faf1dffcb2a78ae7e/typed-ast-1.0.4.tar.gz"; sha256 = "73f09aac0119f6664a3f471a1ec1c9b719f572bc9212913cea96a78b22c2e96e"; };
+      name = "typed-ast-1.1.0";
+      src = pkgs.fetchurl { url = "https://pypi.python.org/packages/52/cf/2ebc7d282f026e21eed4987e42e10964a077c13cfc168b42f3573a7f178c/typed-ast-1.1.0.tar.gz"; sha256 = "57fe287f0cdd9ceaf69e7b71a2e94a24b5d268b35df251a88fef5cc241bf73aa"; };
       doCheck = commonDoCheck;
       buildInputs = commonBuildInputs;
       propagatedBuildInputs = [ ];
@@ -205,7 +205,7 @@ let
   localOverridesFile = ./requirements_override.nix;
   overrides = import localOverridesFile { inherit pkgs python; };
   commonOverrides = [
-    (let src = pkgs.fetchgit { url = "https://github.com/garbas/nixpkgs-python.git"; sha256 = "0gb6whm482wqm09c0aa3frgfzy397k6dqqzmy5pkp2c079riwqxm"; rev = "c63e02f020248b8ffe3bc9201737675bd2bdf5df"; } ; in import "${src}/overrides.nix" { inherit pkgs python; })
+    (let src = pkgs.fetchgit { url = "https://github.com/garbas/nixpkgs-python.git"; sha256 = "07pd0s6jmfsk4r26c339wapkl4rgafn5xk5ypc56ivrra404ihk3"; rev = "ef568b51db9e153e28703285e33975cf1d405598"; } ; in import "${src}/overrides.nix" { inherit pkgs python; })
   ];
   allOverrides =
     (if (builtins.pathExists localOverridesFile)
