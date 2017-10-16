@@ -1,4 +1,5 @@
 import os
+import tempfile
 
 import pytest
 import svm.nix
@@ -28,6 +29,11 @@ skip_in_nix_builder = pytest.mark.skipif(
 def test_prefetch_git_from_non_url_throws():
     with pytest.raises(Exception):
         svm.nix.prefetch_git('')
+
+
+def test_checkout_repo_works_with_reference():
+    with tempfile.TemporaryDirectory() as tempdir:
+        svm.nix.checkout_repo(this_repo(), tempdir, local_mirror=this_repo())
 
 
 @skip_in_nix_builder

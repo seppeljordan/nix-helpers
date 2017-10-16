@@ -39,13 +39,19 @@ def prefetch_git(url, revision=None):
         )
 
 
-def checkout_repo(url, working_directory):
+def checkout_repo(
+        url, working_directory, local_mirror=None
+):
     cmd = [
         'git',
         'clone',
         url,
         working_directory
-    ]
+    ] + (
+        ['--reference', local_mirror] if
+        local_mirror is not None
+        else []
+    )
     subprocess.run(cmd)
 
 
@@ -58,9 +64,11 @@ def checkout_branch(branch_name, workdir):
     subprocess.run(cmd, cwd=workdir)
 
 
-def prefetch_git_branch(url, branch):
+def prefetch_git_branch(
+        url, branch, local_mirror=None
+):
     with tempfile.TemporaryDirectory() as tempdir:
-        checkout_repo(url, tempdir)
+        checkout_repo(url, tempdir, local_mirror)
         checkout_branch(branch, tempdir)
         prefetch_data = prefetch_git(os.path.abspath(tempdir))
         prefetch_data['url'] = url
