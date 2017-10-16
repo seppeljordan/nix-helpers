@@ -31,6 +31,7 @@ def test_prefetch_git_from_non_url_throws():
         svm.nix.prefetch_git('')
 
 
+@skip_in_nix_builder
 def test_checkout_repo_works_with_reference():
     with tempfile.TemporaryDirectory() as tempdir:
         svm.nix.checkout_repo(this_repo(), tempdir, local_mirror=this_repo())
