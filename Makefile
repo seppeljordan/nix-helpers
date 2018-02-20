@@ -15,4 +15,7 @@ check-tests:
 
 check: check-types check-pep8 check-tests
 
-.PHONY: update-nix-deps check check-pep8 check-types check-tests
+clean:
+	rm -rf .cache .mypy_cache *~ src/nix/__pycache__
+
+.PHONY: update-nix-deps check check-pep8 check-types check-tests clean

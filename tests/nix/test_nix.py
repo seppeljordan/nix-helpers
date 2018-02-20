@@ -2,7 +2,7 @@ import os
 import tempfile
 
 import pytest
-import svm.nix
+import nix.prefetch
 
 
 def this_repo():
@@ -34,18 +34,18 @@ def test_prefetch_git_from_non_url_throws():
 @skip_in_nix_builder
 def test_checkout_repo_works_with_reference():
     with tempfile.TemporaryDirectory() as tempdir:
-        svm.nix.checkout_repo(this_repo(), tempdir, local_mirror=this_repo())
+        nix.prefetch.checkout_repo(this_repo(), tempdir, local_mirror=this_repo())
 
 
 @skip_in_nix_builder
 def test_prefetch_git_this_repository_works_does_not_throw():
-    prefetch_results = svm.nix.prefetch_git(this_repo())
+    prefetch_results = nix.prefetch.prefetch_git(this_repo())
     assert 'url' in prefetch_results.keys()
 
 
 @skip_in_nix_builder
 def test_prefetch_git_branch_returns_the_same_as_prefetch_git():
     assert (
-        svm.nix.prefetch_git(this_repo())['sha256'] ==
-        svm.nix.prefetch_git_branch(this_repo(), 'master')['sha256']
+        nix.prefetch.prefetch_git(this_repo())['sha256'] ==
+        nix.prefetch.prefetch_git_branch(this_repo(), 'master')['sha256']
     )
