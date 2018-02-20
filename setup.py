@@ -9,4 +9,5 @@ setup(
     url='https://github.com/seppeljordan/nix-helpers',
     packages=['nix.prefetch'],
     package_dir={'': 'src'},
+    license="GPL-3",
 )
