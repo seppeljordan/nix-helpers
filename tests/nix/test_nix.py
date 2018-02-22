@@ -49,3 +49,8 @@ def test_prefetch_git_branch_returns_the_same_as_prefetch_git():
         nix.prefetch.prefetch_git(this_repo())['sha256'] ==
         nix.prefetch.prefetch_git_branch(this_repo(), 'master')['sha256']
     )
+
+
+@skip_in_nix_builder
+def test_prefetch_github_works():
+    nix.prefetch.prefetch_github("seppeljordan", "nix-helpers")

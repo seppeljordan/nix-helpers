@@ -1,5 +1,7 @@
+PYPI2NIX="/home/sebastian/src/pypi2nix/examples/pypi2nix/bin/pypi2nix"
+
 update-nix-deps:
-	cd nix && pypi2nix -V 3 \
+	cd nix && $(PYPI2NIX) -V 3 \
 		-r ../requirements.txt \
 		-r ../development-requirements.txt \
 		--default-overrides

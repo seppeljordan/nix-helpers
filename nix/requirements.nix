@@ -2,7 +2,7 @@
 # See more at: https://github.com/garbas/pypi2nix
 #
 # COMMAND:
-#   pypi2nix -vvv -V 3 -r ../requirements.txt -r ../development-requirements.txt --default-overrides
+#   pypi2nix -V 3 -r ../requirements.txt -r ../development-requirements.txt --default-overrides
 #
 
 { pkgs ? import <nixpkgs> {}
@@ -357,7 +357,7 @@ let
   localOverridesFile = ./requirements_override.nix;
   overrides = import localOverridesFile { inherit pkgs python; };
   commonOverrides = [
-        (let src = pkgs.fetchFromGitHub { owner = "garbas"; repo = "nixpkgs-python"; rev = "2898854ab5e5cce588379b830fa05f0889c4f627"; sha256 = "1v7ylssqp0m5hh20rjwapv20zp77qmqvqrqclwpkjhwlgwp3v0bw"; } ; in import "${src}/overrides.nix" { inherit pkgs python; })
+        (let src = pkgs.fetchFromGitHub { owner = "garbas"; repo = "nixpkgs-python"; rev = "8fe3c0cae01de79e2dbc98660d177e26a3df8cde"; sha256 = "0dbalc4smg5981pv2f1vczvfyf3sdhcmccwvcbpq684qg82zhxnk"; } ; in import "${src}/overrides.nix" { inherit pkgs python; })
   ];
   allOverrides =
     (if (builtins.pathExists localOverridesFile)
