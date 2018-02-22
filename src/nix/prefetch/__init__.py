@@ -129,7 +129,10 @@ def prefetch_github(owner, repo, rev=None):
             calculated_hash = re_match.group(1)[1:-1]
             break
     if calculated_hash:
-        return actual_rev, calculated_hash
+        return {
+            "rev": actual_rev,
+            "sha256": calculated_hash,
+        }
     else:
         raise Exception(
             (
