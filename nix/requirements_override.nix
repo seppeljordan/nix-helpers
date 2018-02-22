@@ -1,9 +1,14 @@
 { pkgs, python }:
 
+let
+  notPytest = drv:
+    ! (pkgs.lib.hasSuffix "-pytest"
+     (builtins.parseDrvName drv.name).name);
+in
+
 self: super: {
-  pytest = super.pytest.overrideDerivation( old: {
-      patchPhase = ''
-        sed -i "s|setup_requires=\['setuptools-scm'\],||" setup.py
-      '';
-    });
+  attrs = super.attrs.overrideDerivation (old: {
+      propagatedBuildInputs = with builtins;
+        filter notPytest old.propagatedBuildInputs;
+  });
 }
