@@ -10,4 +10,15 @@ setup(
     packages=['nix.prefetch'],
     package_dir={'': 'src'},
     license="GPL-3",
+    install_requires = [
+        'click',
+        'jinja2',
+        'requests',
+    ],
+    include_package_data=True,
+    entry_points={
+        'console_scripts': [
+            'nix-prefetch-github = nix.prefetch.github:main'
+        ]
+    },
 )
