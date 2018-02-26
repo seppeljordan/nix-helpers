@@ -1,4 +1,4 @@
-PYPI2NIX="/home/sebastian/src/pypi2nix/examples/pypi2nix/bin/pypi2nix"
+PYPI2NIX=pypi2nix
 
 update-nix-deps:
 	cd nix && $(PYPI2NIX) -V 3 \
