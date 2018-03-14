@@ -8,7 +8,7 @@
 , click
 }:
 buildPythonPackage {
-  name = "svm-nix-helpers";
+  name = "nix-helpers";
   src = ../.;
   propagatedBuildInputs = [
     click

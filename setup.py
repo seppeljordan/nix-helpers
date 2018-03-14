@@ -15,10 +15,4 @@ setup(
         'jinja2',
         'requests',
     ],
-    include_package_data=True,
-    entry_points={
-        'console_scripts': [
-            'nix-prefetch-github = nix.prefetch.github:main'
-        ]
-    },
 )
